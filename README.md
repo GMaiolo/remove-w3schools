@@ -1,10 +1,14 @@
 *Remove W3Schools*
 =====
+**[Install straight from the Chrome webstore](https://chrome.google.com/webstore/detail/remove-w3schools/gohnadkcefpdhblajddfnhapimpdjkje)**
+
 ![alt text](https://github.com/GMaiolo/remove-w3schools/blob/master/icon.png)
 
 _Chrome plugin to remove W3Schools results in google searches_
 
-Installation: 
++ **Feel free to open issues or send pull requests for improvements/suggestions/bugs.**
+
+Manual Installation: 
 
 1. Clone/download the project
 2. Go to [chrome extensions page](chrome://extensions/)

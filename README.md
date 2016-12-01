@@ -2,7 +2,7 @@
 =====
 **[Install straight from the Chrome webstore](https://chrome.google.com/webstore/detail/remove-w3schools/gohnadkcefpdhblajddfnhapimpdjkje)**
 
-![alt text](https://github.com/GMaiolo/remove-w3schools/blob/master/icon.png)
+![Remove W3Schools logo](https://github.com/GMaiolo/remove-w3schools/blob/master/images/icon128.png)
 
 _Chrome plugin to remove W3Schools results in google searches_
 

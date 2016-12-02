@@ -15,12 +15,12 @@
             console: {
                 removed: 'W3Schools links were removed from this search.'
             }, 
-            search_location: '/search', 
+            search_locations: ['/', '/search'],
             observerConfig: { childList: true, subtree: true }
         }, 
         init: function() {
             /* avoiding google new tab page and other variations */
-            if(window.location.pathname !== this.constants.search_location) {
+            if(!this.isSearchLocation()) {
                 return chrome.runtime.sendMessage({ event: this.constants.events.inactive });
             } 
             chrome.runtime.sendMessage({ event: this.constants.events.get_info }, function(info) {
@@ -69,6 +69,12 @@
             var tId = info.tId;
             var wId = info.wId;
             return this.currentUrl[wId][tId] === currentUrl;
+        },
+        isSearchLocation: function() {
+            var path = window.location.pathname;
+            return this.constants.search_locations.some(function(location){
+                return path === location;
+            })
         }
     };
 

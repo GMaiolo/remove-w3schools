@@ -35,6 +35,7 @@
         var wId = sender.tab.windowId;
         chrome.browserAction.setIcon({ path: tabsManager.imagePaths[msg.event], tabId: tId });
         if(msg.event === 'inactive') {
+            if(msg.url) console.log('Avoided execution in: ' + msg.url);
            chrome.browserAction.setBadgeText({ text: '' });
         } else if(msg.event === 'active') {
             tabsManager.setBadge(wId, tId, msg.count.toString());

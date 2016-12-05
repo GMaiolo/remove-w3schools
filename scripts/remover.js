@@ -4,7 +4,6 @@
         constants: {
             queries: {
                 result_links: 'div.g .r > a[href*="www.w3schools.com"]', 
-                results_node: 'rcnt', 
                 main_google_node: 'main'
             }, 
             events: {
@@ -15,13 +14,13 @@
             console: {
                 removed: 'W3Schools links were removed from this search.'
             }, 
-            search_locations: ['/', '/search'],
             observerConfig: { childList: true, subtree: true }
         }, 
         init: function() {
+            var mainGoogleNode = document.getElementById(this.constants.queries.main_google_node);
             /* avoiding google new tab page and other variations */
-            if(!this.isSearchLocation()) {
-                return chrome.runtime.sendMessage({ event: this.constants.events.inactive });
+            if(!mainGoogleNode) {
+                return chrome.runtime.sendMessage({ event: this.constants.events.inactive, url: window.location.href });
             } 
             chrome.runtime.sendMessage({ event: this.constants.events.get_info }, function(info) {
                 var tId = info.tId;
@@ -29,7 +28,7 @@
                 this.currentUrl[wId] = this.currentUrl[wId] ? this.currentUrl[wId] : {};
                 this.currentUrl[wId][tId] = window.location.href;
                 this.remove(info);
-                this.createResultsObserver();
+                this.createResultsObserver(mainGoogleNode);
             }.bind(this))
         }, 
         getAllW3Links: function() {
@@ -52,9 +51,7 @@
             console.info(count + ' ' + this.constants.console.removed);
             links.forEach(deleteOldGrandpaNode);
         }, 
-        createResultsObserver: function() {
-            var mainGoogleNode = document.getElementById(this.constants.queries.main_google_node);
-            if(!mainGoogleNode) return;
+        createResultsObserver: function(mainGoogleNode) {
             this.resultsObserver = new MutationObserver(function() {
                 chrome.runtime.sendMessage({ event: this.constants.events.get_info }, function(info) {
                     var tId = info.tId;
@@ -69,12 +66,6 @@
             var tId = info.tId;
             var wId = info.wId;
             return this.currentUrl[wId][tId] === currentUrl;
-        },
-        isSearchLocation: function() {
-            var path = window.location.pathname;
-            return this.constants.search_locations.some(function(location){
-                return path === location;
-            })
         }
     };
 

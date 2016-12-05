@@ -3,7 +3,8 @@
         currentUrl: {}, 
         constants: {
             queries: {
-                result_links: 'div.g .r > a[href*="www.w3schools.com"]', 
+                result_links: 'div.g:not([style*="display:none"]):not([style*="display: none"]) .r > a[href*="www.w3schools.com"]', 
+                link_parent_node: '#rso div.g', 
                 main_google_node: 'main'
             }, 
             events: {
@@ -12,6 +13,7 @@
                 active: 'active'
             }, 
             console: {
+                needs_to_be_updated: 'W3SchoolsRemover selectors need to be updated!', 
                 removed: 'W3Schools links were removed from this search.'
             }, 
             observerConfig: { childList: true, subtree: true }
@@ -49,7 +51,7 @@
             this.currentUrl[wId][tId] = window.location.href;
             chrome.runtime.sendMessage({ event: this.constants.events.active, count: count });
             console.info(count + ' ' + this.constants.console.removed);
-            links.forEach(deleteOldGrandpaNode);
+            links.forEach(this.deleteOldGrandpaNode.bind(this));
         }, 
         createResultsObserver: function(mainGoogleNode) {
             this.resultsObserver = new MutationObserver(function() {
@@ -66,18 +68,13 @@
             var tId = info.tId;
             var wId = info.wId;
             return this.currentUrl[wId][tId] === currentUrl;
+        }, 
+        deleteOldGrandpaNode: function(el) {
+            var parent = el.closest(this.constants.queries.link_parent_node);
+            if(!parent) return console.warn(this.constants.console.needs_to_be_updated);
+            parent.style.display = 'none';
         }
     };
-
-    function deleteOldGrandpaNode(el) {
-        var parent = el.parentNode;
-        if(!parent) return;
-        parent = parent.parentNode;
-        if(!parent) return;
-        parent = parent.parentNode;
-        if(!parent) return;
-        parent.remove();
-    }
 
     W3SchoolsRemover.init();
 

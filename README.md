@@ -2,8 +2,8 @@
 
   <p align="center">
     <a href="https://www.npmjs.com/package/subscribr"><img src="https://img.shields.io/chrome-web-store/d/gohnadkcefpdhblajddfnhapimpdjkje.svg" alt="downloads"></a>
-    <a href="https://www.npmjs.com/package/subscribr"><img src="https://img.shields.io/chrome-web-store/stars/gohnadkcefpdhblajddfnhapimpdjkje.svg" alt="stars"></a>
     <a href="https://www.npmjs.com/package/subscribr"><img src="https://img.shields.io/chrome-web-store/rating/gohnadkcefpdhblajddfnhapimpdjkje.svg" alt="stars"></a>
+    <a href="https://www.npmjs.com/package/subscribr"><img src="https://img.shields.io/chrome-web-store/stars/gohnadkcefpdhblajddfnhapimpdjkje.svg" alt="stars"></a>
   </p>
   <p align="center"><a href="https://chrome.google.com/webstore/detail/remove-w3schools/gohnadkcefpdhblajddfnhapimpdjkje"><b>Install straight from the Chrome webstore</b></a></p>
   <p align="center"><img src="https://github.com/GMaiolo/remove-w3schools/blob/master/images/icon128.png" alt="logo"></p>

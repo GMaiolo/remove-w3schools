@@ -1,5 +1,5 @@
 <h2 align="center">Remove W3Schools</h2>
-=====
+
 
   <p align="center"><a href="https://www.npmjs.com/package/subscribr"><img src="https://img.shields.io/chrome-web-store/d/gohnadkcefpdhblajddfnhapimpdjkje.svg" alt="downloads"></a></p>
   <p align="center"><a href="https://chrome.google.com/webstore/detail/remove-w3schools/gohnadkcefpdhblajddfnhapimpdjkje"><b>Install straight from the Chrome webstore</b></a></p>

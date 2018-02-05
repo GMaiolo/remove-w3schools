@@ -24,14 +24,14 @@
             if(!mainGoogleNode) {
                 return chrome.runtime.sendMessage({ event: this.constants.events.inactive, url: window.location.href });
             } 
-            chrome.runtime.sendMessage({ event: this.constants.events.get_info }, function(info) {
+            chrome.runtime.sendMessage({ event: this.constants.events.get_info }, (info) => {
                 var tId = info.tId;
                 var wId = info.wId;
                 this.currentUrl[wId] = this.currentUrl[wId] ? this.currentUrl[wId] : {};
                 this.currentUrl[wId][tId] = window.location.href;
                 this.remove(info);
                 this.createResultsObserver(mainGoogleNode);
-            }.bind(this))
+            });
         }, 
         getAllW3Links: function() {
             return document.querySelectorAll(this.constants.queries.result_links);
@@ -54,14 +54,14 @@
             links.forEach(this.deleteOldGrandpaNode.bind(this));
         }, 
         createResultsObserver: function(mainGoogleNode) {
-            this.resultsObserver = new MutationObserver(function() {
-                chrome.runtime.sendMessage({ event: this.constants.events.get_info }, function(info) {
+            this.resultsObserver = new MutationObserver(() => {
+                chrome.runtime.sendMessage({ event: this.constants.events.get_info }, info => {
                     var tId = info.tId;
                     var wId = info.wId;
                     this.currentUrl[wId] = this.currentUrl[wId] ? this.currentUrl[wId] : {};
                     this.remove(info);
-                }.bind(this));
-            }.bind(this))
+                });
+            });
             this.resultsObserver.observe(mainGoogleNode, this.constants.observerConfig);
         }, 
         isSameUrl: function(currentUrl, info) {

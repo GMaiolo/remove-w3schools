@@ -33,14 +33,16 @@
     chrome.runtime.onMessage.addListener(function(msg, sender, callback) {
         var tId = sender.tab.id;
         var wId = sender.tab.windowId;
-        chrome.browserAction.setIcon({ path: tabsManager.imagePaths[msg.event], tabId: tId });
-        if(msg.event === 'inactive') {
-            if(msg.url) console.log('Avoided execution in: ' + msg.url);
-           chrome.browserAction.setBadgeText({ text: '' });
-        } else if(msg.event === 'active') {
-            tabsManager.setBadge(wId, tId, msg.count.toString());
-        } else if(msg.event === 'get_tId_and_wId') {
+        if(msg.event === 'get_tId_and_wId') {
             callback({ tId: tId, wId: tId });
+        } else {
+            chrome.browserAction.setIcon({ path: tabsManager.imagePaths[msg.event], tabId: tId });
+            if(msg.event === 'inactive') {
+                if(msg.url) console.log('Avoided execution in: ' + msg.url);
+                chrome.browserAction.setBadgeText({ text: '' });
+            } else if(msg.event === 'active') {
+                tabsManager.setBadge(wId, tId, msg.count.toString());
+            }
         }
     });
 

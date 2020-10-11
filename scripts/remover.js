@@ -3,7 +3,7 @@
         currentUrl: {}, 
         constants: {
             queries: {
-                result_links: 'div.g:not([style*="display:none"]):not([style*="display: none"]) .r > a[href*="www.w3schools.com"]', 
+                result_links: 'div.g:not([style*="display:none"]):not([style*="display: none"]) .rc > div > a[href*="www.w3schools.com"]', 
                 link_parent_node: '#rso div.g', 
                 main_google_node: 'main'
             }, 
@@ -76,6 +76,10 @@
         }
     };
 
-    W3SchoolsRemover.init();
+    /* may need to tune this timeout in the future
+    otherwise we get progressive removals instead of all them toghether */
+    setTimeout(() => {
+        W3SchoolsRemover.init();
+    }, 250)
 
 })();

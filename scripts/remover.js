@@ -25,8 +25,7 @@
                 return chrome.runtime.sendMessage({ event: this.constants.events.inactive, url: window.location.href });
             } 
             chrome.runtime.sendMessage({ event: this.constants.events.get_info }, (info) => {
-                var tId = info.tId;
-                var wId = info.wId;
+                const { tId, wId } = info;
                 this.currentUrl[wId] = this.currentUrl[wId] ? this.currentUrl[wId] : {};
                 this.currentUrl[wId][tId] = window.location.href;
                 this.remove(info);
@@ -37,8 +36,7 @@
             return document.querySelectorAll(this.constants.queries.result_links);
         }, 
         remove: function(info) {
-            var tId = info.tId;
-            var wId = info.wId;
+            const { tId, wId } = info;
             var links = this.getAllW3Links();
             var count = links.length;
             if(!count) {
@@ -56,8 +54,7 @@
         createResultsObserver: function(mainGoogleNode) {
             this.resultsObserver = new MutationObserver(() => {
                 chrome.runtime.sendMessage({ event: this.constants.events.get_info }, info => {
-                    var tId = info.tId;
-                    var wId = info.wId;
+                    const { tId, wId } = info;
                     this.currentUrl[wId] = this.currentUrl[wId] ? this.currentUrl[wId] : {};
                     this.remove(info);
                 });
@@ -65,8 +62,7 @@
             this.resultsObserver.observe(mainGoogleNode, this.constants.observerConfig);
         }, 
         isSameUrl: function(currentUrl, info) {
-            var tId = info.tId;
-            var wId = info.wId;
+            const { tId, wId } = info;
             return this.currentUrl[wId][tId] === currentUrl;
         }, 
         deleteOldGrandpaNode: function(el) {

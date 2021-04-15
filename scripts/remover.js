@@ -3,7 +3,7 @@
         currentUrl: {}, 
         constants: {
             queries: {
-                result_links: '.g > div > div > a[href*="www.w3schools.com"]', 
+                result_links: '.g div > a[href*="www.w3schools.com"]', 
                 link_parent_node: '#rso div.g', 
                 main_google_node: 'main'
             }, 
@@ -39,7 +39,12 @@
         remove: function(info) {
             var tId = info.tId;
             var wId = info.wId;
-            var links = this.getAllW3Links();
+            // ignoring dropdown items and huge card on the right
+            var links = Array.from(this.getAllW3Links()).filter(function (link) {
+                var isAccordionItem = Boolean(link.closest('g-accordion-expander'))
+                var isHugeCardOnTheRight = Boolean(link.closest('#wp-tabs-container'))
+                return !isAccordionItem && !isHugeCardOnTheRight
+            });
             var count = links.length;
             if(!count) {
                 if(!this.isSameUrl(window.location.href, info)) {

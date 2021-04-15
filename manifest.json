@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "Remove W3Schools",
     "description": "Remove W3Schools results in google searches",
-    "version": "3.0.22",
+    "version": "3.0.23",
     "background": {
         "scripts": [ "scripts/bg.js" ], 
         "persistent": false
